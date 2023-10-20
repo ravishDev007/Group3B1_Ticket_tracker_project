@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="home/header :: header"></div>
+
+<body>
+	<div th:replace="home/header :: navbar"></div>
+	<br />
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-9">
+				<div th:each="ticket: ${ticketsResponse}">
+					<div class="card">
+						<div class="card-header">
+							<h3>
+								<a th:href="@{/ticket/{ticketUrl}(ticketUrl= ${ticket.url})}"
+									th:text="${ticket.title}"></a>
+							</h3>
+							<div>
+								<strong
+									th:text="${#temporals.format(ticket.createdOn, 'dd MMMM yyyy')}">
+								</strong>
+
+							</div>
+						</div>
+						<div class="card-body">
+							<span th:utext="${ticket.shortDescription}"> </span> <a
+								th:href="@{/ticket/{ticketUrl}(ticketUrl = ${ticket.url})}">Read
+								more</a>
+						</div>
+
+					</div>
+					<br />
+				</div>
+
+			</div>
+			<div class="col-md-3">
+				<!-- Search bar -->
+				<div th:replace = "home/search :: search"></div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div th:replace="home/footer :: footer"></div>
+</body>
+</html>
